@@ -14,12 +14,27 @@
         "email": "thomas@lekoala.be"
     }],
     "require": {
-        "silverstripe/framework": "~3.2"
+        "php" : "~5.6|~7.0",
+        "silverstripe/framework": "^4.1",
+        "silverware/calendar": "~1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.9.2",
+        "phpunit/phpunit": "^5.7",
+        "squizlabs/php_codesniffer": "^3"
+    },
+    "autoload": {
+        "psr-4": {
+            "TitleDK\\Calendar\\": "code/",
+            "TitleDK\\Calendar\\Tests\\": "tests/"
+        }
     },
     "extra": {
         "installer-name": "email-templates"
     },
     "support": {
         "issues": "https://github.com/lekoala/silverstripe-email-templates/issues"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

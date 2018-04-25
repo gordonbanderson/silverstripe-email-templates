@@ -1,9 +1,7 @@
 ---
 Name: email-templates
-After:
-#  - 'framework/*'
-  - 'cms/*'
 ---
+
 SiteConfig:
   email_templates_update_fields: true
   extensions:

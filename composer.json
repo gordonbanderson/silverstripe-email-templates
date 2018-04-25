@@ -1,7 +1,7 @@
 {
     "name": "lekoala/silverstripe-email-templates",
     "description": "Adds email-templates in the SilverStripe CMS",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "keywords": [
         "silverstripe",
         "email-templates",
@@ -32,10 +32,7 @@
     "extra": {
         "installer-name": "email-templates",
         "expose": [
-            "images",
-            "css",
-            "javascript",
-            "thirdparty"
+            "images"
         ]
     },
     "support": {

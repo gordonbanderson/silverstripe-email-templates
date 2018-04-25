@@ -2,12 +2,12 @@
 Name: email-templates
 ---
 
-SiteConfig:
+Silverstripe\SiteConfig\SiteConfig:
   email_templates_update_fields: true
   extensions:
-    - EmailTemplateSiteConfigExtension
+    - LeKoala\EmailTemplates\Extension\EmailTemplateSiteConfigExtension
 
-EmailTemplate:
+LeKoala\EmailTemplates\Model\EmailTemplate:
   helper_show_methods: false
   # template options
   base_color: '#ff6f6f'
@@ -20,17 +20,17 @@ EmailTemplate:
   logo_field: 'LogoID'
   base_color_field: 'PrimaryColor'
 
-EmailImportTask:
+LeKoala\EmailTemplates\Task\EmailImportTask:
   ignored_modules: ['cms','framework']
 
-BetterEmail:
+SilverStripe\Control\Email\Email\BetterEmail:
   max_records: 1000
   # possible values : 'time' or 'max'
   cleanup_method: 'max'
   cleanup_time: '-7 days'
   template: 'DefaultEmailTemplate'
 
-Injector:
+SilverStripe\Core\Injector\Injector:
   Email:
     class: LeKoala\EmailTemplates\Email\BetterEmail
   Member_ForgotPasswordEmail:

@@ -1,11 +1,17 @@
 <?php
 namespace LeKoala\EmailTemplates\Model;
 use LeKoala\EmailTemplates\Email\BetterEmail;
+use SilverStripe\Control\Email\Email;
 use SilverStripe\Core\ClassInfo;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
 use SilverStripe\View\ArrayData;
+use SilverStripe\View\Parsers\URLSegmentFilter;
 
 /**
  * EmailTemplate
@@ -98,10 +104,14 @@ class EmailTemplate extends DataObject
             $fields->addFieldToTab('Root.Preview', $this->previewTab());
         }
 
+
+        // @todo This breaks in SilverStripe 4
+        /**
         $mailer = Email::mailer();
         if (!$mailer->hasMethod('getSendingDisabled')) {
             $fields->insertAfter('Disabled', new LiteralField('DisabledWarning', '<div class="message bad">' . _t('EmailTemplate.DISABLEDWARNING', "Your mailer does not support disabling emails") . '</div>'));
         }
+         */
 
         return $fields;
     }
@@ -208,7 +218,7 @@ class EmailTemplate extends DataObject
     public function onBeforeWrite()
     {
         if ($this->Code) {
-            $filter = new URLSegmentFilter;
+            $filter = new URLSegmentFilter();
             $this->Code = $filter->filter($this->Code);
         }
 
@@ -291,7 +301,7 @@ class EmailTemplate extends DataObject
         $tab = new Tab('Preview');
 
         // Preview iframe
-        $iframeSrc = '/admin/emails/EmailTemplate/PreviewEmail/?id=' . $this->ID;
+        $iframeSrc = '/admin/emails/LeKoala-EmailTemplates-Model-EmailTemplate/PreviewEmail/?id=' . $this->ID;
         $iframe = new LiteralField('iframe', '<iframe src="' . $iframeSrc . '" style="width:800px;background:#fff;border:1px solid #ccc;min-height:500px;vertical-align:top"></iframe>');
         $tab->push($iframe);
 
@@ -474,6 +484,6 @@ class EmailTemplate extends DataObject
             $data[$name] = $o;
         }
 
-        return $email->populateTemplate($data);
+        return $email->setData($data);
     }
 }

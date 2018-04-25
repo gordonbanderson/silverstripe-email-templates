@@ -1,5 +1,11 @@
 <?php
 
+use SilverStripe\ORM\DB;
+use SilverStripe\i18n\i18n;
+use SilverStripe\Control\Director;
+use SilverStripe\i18n\TextCollection\i18nTextCollector;
+use SilverStripe\Dev\BuildTask;
+
 /**
  * EmailImportTask
  *

@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\ORM\ArrayLib;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\View\Requirements;
+use SilverStripe\Admin\ModelAdmin;
+
 /**
  * EmailTemplatesAdmin
  *

@@ -1,5 +1,23 @@
 <?php
 
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Security\Member;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\ORM\DataQuery;
+use SilverStripe\View\Parsers\URLSegmentFilter;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\i18n\i18n;
+use SilverStripe\View\ArrayData;
+
 /**
  * EmailTemplate
  *
@@ -55,9 +73,9 @@ class EmailTemplate extends DataObject
         $config = EmailTemplate::config();
 
         $objectsSource = array();
-        $dataobjects = ClassInfo::subclassesFor('DataObject');
+        $dataobjects = ClassInfo::subclassesFor(DataObject::class);
         foreach ($dataobjects as $dataobject) {
-            if ($dataobject == 'DataObject') {
+            if ($dataobject == DataObject::class) {
                 continue;
             }
             $objectsSource[$dataobject] = $dataobject;
@@ -107,8 +125,8 @@ class EmailTemplate extends DataObject
     public function getBaseModels()
     {
         return array(
-            'CurrentMember' => 'Member',
-            'SiteConfig' => 'SiteConfig'
+            'CurrentMember' => Member::class,
+            'SiteConfig' => SiteConfig::class
         );
     }
 
@@ -217,7 +235,7 @@ class EmailTemplate extends DataObject
     {
         $content = '<strong>Base fields:</strong><br/>';
         $baseFields = array(
-            'To', 'Cc', 'Bcc', 'From', 'Subject', 'Body', 'BaseURL', 'Controller'
+            'To', 'Cc', 'Bcc', 'From', 'Subject', 'Body', 'BaseURL', Controller::class
         );
         foreach ($baseFields as $baseField) {
             $content .= $baseField . ', ';

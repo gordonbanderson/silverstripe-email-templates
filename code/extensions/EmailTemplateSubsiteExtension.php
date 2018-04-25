@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\ORM\DataQuery;
+use SilverStripe\Security\Permission;
+use SilverStripe\ORM\DataExtension;
+
 /**
  * Add subsites support
  *

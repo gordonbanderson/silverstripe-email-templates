@@ -4,32 +4,31 @@ After:
   - 'framework/*'
   - 'cms/*'
 ---
-SiteConfig:
+SilverStripe\SiteConfig\SiteConfig:
   email_templates_update_fields: true
   extensions:
     - EmailTemplateSiteConfigExtension
 EmailTemplate:
   helper_show_methods: false
-  # template options
   base_color: '#ff6f6f'
   show_facebook: true
   show_twitter: true
   show_rss: false
-  # fields used in SiteConfig
-  facebook_field: 'FacebookAccount'
-  twitter_field: 'TwitterAccount'
-  logo_field: 'LogoID'
-  base_color_field: 'PrimaryColor'
+  facebook_field: FacebookAccount
+  twitter_field: TwitterAccount
+  logo_field: LogoID
+  base_color_field: PrimaryColor
 EmailImportTask:
-  ignored_modules: ['cms','framework']
+  ignored_modules:
+    - cms
+    - framework
 BetterEmail:
   max_records: 1000
-  # possible values : 'time' or 'max'
-  cleanup_method: 'max'
+  cleanup_method: max
   cleanup_time: '-7 days'
-  template: 'DefaultEmailTemplate'
-Injector:
-  Email:
+  template: DefaultEmailTemplate
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Control\Email\Email:
     class: BetterEmail
   Member_ForgotPasswordEmail:
     class: MemberForgotPasswordEmail

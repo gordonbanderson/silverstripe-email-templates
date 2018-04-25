@@ -3,10 +3,7 @@ namespace LeKoala\EmailTemplates\Extension;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataQuery;
 use SilverStripe\ORM\Queries\SQLSelect;
-
-use SilverStripe\ORM\DataQuery;
 use SilverStripe\Security\Permission;
-use SilverStripe\ORM\DataExtension;
 
 /**
  * Add subsites support

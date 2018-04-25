@@ -3,12 +3,8 @@ namespace LeKoala\EmailTemplates\Task;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\DB;
-
-use SilverStripe\ORM\DB;
-use SilverStripe\i18n\i18n;
 use SilverStripe\Control\Director;
 use SilverStripe\i18n\TextCollection\i18nTextCollector;
-use SilverStripe\Dev\BuildTask;
 
 /**
  * EmailImportTask

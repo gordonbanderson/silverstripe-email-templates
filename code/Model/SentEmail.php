@@ -2,17 +2,9 @@
 namespace LeKoala\EmailTemplates\Model;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Permission;
-
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\ReadonlyField;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Control\Email\Email;
-use SilverStripe\Security\Permission;
-use SilverStripe\ORM\DataObject;
 
 /**
  * Defines a record that stores an email that was sent via {@link BetterEmail}
@@ -29,6 +21,7 @@ use SilverStripe\ORM\DataObject;
  */
 class SentEmail extends DataObject
 {
+    private static $table_name = 'SentEmail';
 
     private static $db = array(
         'To' => 'Varchar(191)',

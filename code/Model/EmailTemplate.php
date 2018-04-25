@@ -12,24 +12,12 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Parsers\URLSegmentFilter;
-
-use SilverStripe\ORM\DataObject;
-use SilverStripe\Core\ClassInfo;
-use SilverStripe\Forms\HeaderField;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Control\Email\Email;
-use SilverStripe\Security\Member;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\ORM\DataQuery;
-use SilverStripe\View\Parsers\URLSegmentFilter;
 use SilverStripe\Control\Controller;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\i18n\i18n;
-use SilverStripe\View\ArrayData;
 
 /**
  * EmailTemplate
@@ -47,6 +35,8 @@ use SilverStripe\View\ArrayData;
  */
 class EmailTemplate extends DataObject
 {
+
+    private static $table_name = 'EmailTemplate';
 
     private static $db = array(
         'Title' => 'Varchar(255)',
@@ -323,6 +313,7 @@ class EmailTemplate extends DataObject
         $iframe = new LiteralField('iframe', '<iframe src="' . $iframeSrc . '" style="width:800px;background:#fff;border:1px solid #ccc;min-height:500px;vertical-align:top"></iframe>');
         $tab->push($iframe);
 
+        // this is in another of his modules
         if (class_exists('CmsInlineFormAction')) {
             // Test emails
             $compo = new FieldGroup(
@@ -418,6 +409,7 @@ class EmailTemplate extends DataObject
      */
     public function renderTemplate($parse = false, $injectFake = false)
     {
+        echo 'PARSE=' . $parse .' , inject = ' . $injectFake;
         // Disable debug bar in the iframe
         Config::inst()->update('DebugBar', 'auto_inject', false);
 
@@ -428,9 +420,16 @@ class EmailTemplate extends DataObject
 
         $debug = $email->debug();
 
+        die;
+        echo "<hr/>PRE_VIEW:<pre>{$debug}<pre><hr/>";
+
         // Actual email content is after the first </p>
         $paragraphPosition = strpos($debug, '</p>');
         $html = substr($debug, $paragraphPosition + 4);
+
+        echo 'LEN: ' . strlen($html);
+        echo ',PP=: ' . $paragraphPosition;
+
 
         return (string)$html;
     }

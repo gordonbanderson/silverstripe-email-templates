@@ -2,7 +2,6 @@
 namespace LeKoala\EmailTemplates\Email;
 
 use SilverStripe\Control\Email\Email;
-
 use SilverStripe\ORM\DB;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\i18n\i18n;
@@ -14,7 +13,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Security;
 use SilverStripe\Control\HTTP;
-use SilverStripe\Control\Email\Email;
 
 /**
  * An improved and more pleasant base Email class to use on your project

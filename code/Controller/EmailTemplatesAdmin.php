@@ -6,10 +6,6 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\ORM\ArrayLib;
 use SilverStripe\View\Requirements;
 
-use SilverStripe\ORM\ArrayLib;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\View\Requirements;
-use SilverStripe\Admin\ModelAdmin;
 
 /**
  * EmailTemplatesAdmin

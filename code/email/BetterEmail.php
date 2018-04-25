@@ -273,7 +273,7 @@ class BetterEmail extends Email
                     $parsed_body[$k] = $viewer->process($data);
                 } catch (Exception $ex) {
                     SS_Log::log($ex->getMessage(), SS_Log::DEBUG);
-                    if(Director::isDev()) {
+                    if (Director::isDev()) {
                         $parsed_body[$k] = $ex->getMessage();
                     }
                 }
@@ -529,11 +529,11 @@ class BetterEmail extends Email
         }
         return HTTP::urlRewriter($html, function ($url) {
                 //no need to rewrite, if uri has a protocol (determined here by existence of reserved URI character ":")
-                if (preg_match('/^\w+:/', $url)) {
-                    return $url;
-                }
+            if (preg_match('/^\w+:/', $url)) {
+                return $url;
+            }
                 return self::safeAbsoluteURL($url, true);
-            });
+        });
     }
 
     /**

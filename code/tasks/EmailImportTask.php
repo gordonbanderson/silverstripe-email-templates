@@ -51,7 +51,7 @@ class EmailImportTask extends BuildTask
             $subsites = array();
             if ($importToSubsite == 'all') {
                 $subsites = Subsite::get()->map();
-            } else if (is_numeric($importToSubsite)) {
+            } elseif (is_numeric($importToSubsite)) {
                 $subsites = array(
                     $importToSubsite => Subsite::get()->byID($importToSubsite)->Title
                 );

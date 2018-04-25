@@ -3,6 +3,7 @@ namespace LeKoala\EmailTemplates\Controller;
 use LeKoala\EmailTemplates\Model\EmailTemplate;
 use SilverStripe\Admin\ModelAdmin;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\ORM\ArrayLib;
 use SilverStripe\View\Requirements;
 
 /**
@@ -14,8 +15,8 @@ class EmailTemplatesAdmin extends ModelAdmin
 {
 
     private static $managed_models = array(
-        'EmailTemplate',
-        'SentEmail',
+        'LeKoala\EmailTemplates\Model\EmailTemplate',
+        'LeKoala\EmailTemplates\Model\SentEmail',
     );
     private static $url_segment = 'emails';
     private static $menu_title = 'Emails';
@@ -38,7 +39,8 @@ class EmailTemplatesAdmin extends ModelAdmin
         $context = parent::getSearchContext();
 
         $categories = EmailTemplate::get()->column('Category');
-        $context->getFields()->replaceField('q[Category]', $dd = new DropdownField('q[Category]', 'Category', ArrayLib::valuekey($categories)));
+        $context->getFields()->replaceField('q[Category]', $dd = new DropdownField('q[Category]',
+            'Category', ArrayLib::valuekey($categories)));
         $dd->setEmptyString('');
 
         return $context;

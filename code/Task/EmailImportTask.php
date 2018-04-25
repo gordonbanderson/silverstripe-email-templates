@@ -1,6 +1,7 @@
 <?php
-namespace LeKoala\EmailTemplates\Model;
+namespace LeKoala\EmailTemplates\Task;
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\DB;
 
 /**
@@ -14,6 +15,8 @@ class EmailImportTask extends BuildTask
 
     protected $title = "Email import task";
     protected $description = "Finds all *Email.ss templates and imports them into the CMS, if they don't already exist.";
+
+    private static $segment = 'import-email-templates';
 
     public function run($request)
     {
@@ -74,7 +77,7 @@ class EmailImportTask extends BuildTask
             }
         }
 
-        $emailTemplateSingl = singleton('EmailTemplate');
+        $emailTemplateSingl = singleton('LeKoala\EmailTemplates\Model\EmailTemplate');
 
         $ignoredModules = self::config()->ignored_modules;
         if (!is_array($ignoredModules)) {
@@ -100,6 +103,7 @@ class EmailImportTask extends BuildTask
 
         $defaultLocale = i18n::get_locale();
 
+        // @todo This does not exist in SilverStripe 4
         $templates = SS_TemplateLoader::instance()->getManifest()->getTemplates();
         foreach ($templates as $t) {
             $isOverwritten = false;

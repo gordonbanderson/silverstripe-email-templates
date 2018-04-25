@@ -3,6 +3,19 @@ namespace LeKoala\EmailTemplates\Email;
 
 use SilverStripe\Control\Email\Email;
 
+use SilverStripe\ORM\DB;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\i18n\i18n;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\View\SSViewer;
+use SilverStripe\View\Requirements;
+use SilverStripe\Control\Director;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
+use SilverStripe\Control\HTTP;
+use SilverStripe\Control\Email\Email;
+
 /**
  * An improved and more pleasant base Email class to use on your project
  *
@@ -227,8 +240,8 @@ class BetterEmail extends Email
     protected function parseVariables($isPlain = false)
     {
         // Turn off source fill comments will rendering the content
-        $state = Config::inst()->get('SSViewer', 'source_file_comments');
-        Config::inst()->update('SSViewer', 'source_file_comments', false);
+        $state = Config::inst()->get(SSViewer::class, 'source_file_comments');
+        Config::inst()->update(SSViewer::class, 'source_file_comments', false);
 
         // Avoid clutter in our rendered html
         Requirements::clear();
@@ -263,7 +276,7 @@ class BetterEmail extends Email
                     $parsed_body[$k] = $viewer->process($data);
                 } catch (Exception $ex) {
                     SS_Log::log($ex->getMessage(), SS_Log::DEBUG);
-                    if(Director::isDev()) {
+                    if (Director::isDev()) {
                         $parsed_body[$k] = $ex->getMessage();
                     }
                 }
@@ -285,7 +298,7 @@ class BetterEmail extends Email
             $this->body = self::rewriteURLs($this->body);
         }
 
-        Config::inst()->update('SSViewer', 'source_file_comments', $state);
+        Config::inst()->update(SSViewer::class, 'source_file_comments', $state);
         Requirements::restore();
 
         return $this;
@@ -519,11 +532,11 @@ class BetterEmail extends Email
         }
         return HTTP::urlRewriter($html, function ($url) {
                 //no need to rewrite, if uri has a protocol (determined here by existence of reserved URI character ":")
-                if (preg_match('/^\w+:/', $url)) {
-                    return $url;
-                }
+            if (preg_match('/^\w+:/', $url)) {
+                return $url;
+            }
                 return self::safeAbsoluteURL($url, true);
-            });
+        });
     }
 
     /**

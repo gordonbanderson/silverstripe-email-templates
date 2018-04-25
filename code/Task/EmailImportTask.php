@@ -4,6 +4,12 @@ use SilverStripe\Dev\BuildTask;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\DB;
 
+use SilverStripe\ORM\DB;
+use SilverStripe\i18n\i18n;
+use SilverStripe\Control\Director;
+use SilverStripe\i18n\TextCollection\i18nTextCollector;
+use SilverStripe\Dev\BuildTask;
+
 /**
  * EmailImportTask
  *
@@ -51,7 +57,7 @@ class EmailImportTask extends BuildTask
             $subsites = array();
             if ($importToSubsite == 'all') {
                 $subsites = Subsite::get()->map();
-            } else if (is_numeric($importToSubsite)) {
+            } elseif (is_numeric($importToSubsite)) {
                 $subsites = array(
                     $importToSubsite => Subsite::get()->byID($importToSubsite)->Title
                 );

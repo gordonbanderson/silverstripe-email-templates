@@ -7,6 +7,13 @@ use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Permission;
 
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Security\Permission;
+use SilverStripe\ORM\DataObject;
+
 /**
  * Defines a record that stores an email that was sent via {@link BetterEmail}
  *
@@ -55,8 +62,7 @@ class SentEmail extends DataObject
     {
         $fields = parent::getBetterButtonsActions();
         $fields->push(BetterButtonCustomAction::create('resend', 'Resend')
-                ->setRedirectType(BetterButtonCustomAction::REFRESH)
-        );
+                ->setRedirectType(BetterButtonCustomAction::REFRESH));
 
         $this->extend('updateBetterButtonsActions', $fields);
 

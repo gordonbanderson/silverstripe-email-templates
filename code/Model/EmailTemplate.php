@@ -1,4 +1,11 @@
 <?php
+namespace LeKoala\EmailTemplates\Model;
+use LeKoala\EmailTemplates\Email\BetterEmail;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Forms\Tab;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Member;
+use SilverStripe\View\ArrayData;
 
 /**
  * EmailTemplate

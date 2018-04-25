@@ -1,7 +1,14 @@
 <?php
+namespace LeKoala\EmailTemplates\Model;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Permission;
 
 /**
- * Defines a record that stores an email that was sent via {@link BetterEmail} 
+ * Defines a record that stores an email that was sent via {@link BetterEmail}
  *
  * @property string $To
  * @property string $From
@@ -149,7 +156,7 @@ class SentEmail extends DataObject
      * @param  Member $member
      * @return boolean
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = array())
     {
         return false;
     }

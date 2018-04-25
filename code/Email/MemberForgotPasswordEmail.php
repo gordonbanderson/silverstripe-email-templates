@@ -1,4 +1,5 @@
 <?php
+namespace LeKoala\EmailTemplates\Email;
 
 class MemberForgotPasswordEmail extends BetterEmail
 {

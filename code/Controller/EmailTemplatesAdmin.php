@@ -1,4 +1,9 @@
 <?php
+namespace LeKoala\EmailTemplates\Controller;
+use LeKoala\EmailTemplates\Model\EmailTemplate;
+use SilverStripe\Admin\ModelAdmin;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\View\Requirements;
 
 /**
  * EmailTemplatesAdmin
@@ -70,10 +75,10 @@ class EmailTemplatesAdmin extends ModelAdmin
 
         $id = (int) $this->getRequest()->getVar('id');
 
-        /* @var $SentEmail SentEmail */
-        $SentEmail = SentEmail::get()->byID($id);
+        /* @var $sentEmail SentEmail */
+        $sentEmail = SentEmail::get()->byID($id);
 
-        $html = $SentEmail->Body;
+        $html = $sentEmail->Body;
 
         Requirements::restore();
 
@@ -86,27 +91,27 @@ class EmailTemplatesAdmin extends ModelAdmin
 
         $id = (int) $request->requestVar('EmailTemplateID');
         if (!$id) {
-            throw new Exception('Please define EmailTemplateID parameter');
+            throw new \Exception('Please define EmailTemplateID parameter');
         }
 
-        $EmailTemplate = EmailTemplate::get()->byID($id);
-        if (!$EmailTemplate) {
-            throw new Exception("Template is not found");
+        $emailTemplate = EmailTemplate::get()->byID($id);
+        if (!$emailTemplate) {
+            throw new \Exception("Template is not found");
         }
-        $SendTestEmail = $request->requestVar('SendTestEmail');
+        $sendTestEmail = $request->requestVar('SendTestEmail');
 
-        if (!$SendTestEmail) {
-            throw new Exception('Please define SendTestEmail parameter');
+        if (!$sendTestEmail) {
+            throw new \Exception('Please define SendTestEmail parameter');
         }
 
-        $email = $EmailTemplate->getEmail();
-        $email->setTo($SendTestEmail);
+        $email = $emailTemplate->getEmail();
+        $email->setTo($sendTestEmail);
 
         $res = $email->send();
 
         if ($res) {
-            return 'Test email sent to ' . $SendTestEmail;
+            return 'Test email sent to ' . $sendTestEmail;
         }
-        return 'Failed to send test to ' . $SendTestEmail;
+        return 'Failed to send test to ' . $sendTestEmail;
     }
 }

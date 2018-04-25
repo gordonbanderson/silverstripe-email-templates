@@ -1,4 +1,11 @@
 <?php
+namespace LeKoala\EmailTemplates\Extension;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * EmailTemplateSiteConfigExtension
@@ -29,7 +36,7 @@ class EmailTemplateSiteConfigExtension extends DataExtension
             return $fields;
         }
 
-        $EmailFooter = new HtmlEditorField('EmailFooter', _t('EmailTemplateSiteConfigExtension.EmailFooter', 'Email Footer'));
+        $EmailFooter = new HTMLEditorField('EmailFooter', _t('EmailTemplateSiteConfigExtension.EmailFooter', 'Email Footer'));
         $EmailFooter->setRows(3);
         $fields->addFieldToTab('Root.Email', $EmailFooter);
 
@@ -59,7 +66,7 @@ class EmailTemplateSiteConfigExtension extends DataExtension
             return $config->send_all_emails_to;
         }
 
-        throw new Exception('Could not find the default email recipient');
+        throw new \Exception('Could not find the default email recipient');
     }
 
     public function EmailDefaultSender()
@@ -82,16 +89,16 @@ class EmailTemplateSiteConfigExtension extends DataExtension
             return $config->send_all_emails_from;
         }
 
-        throw new Exception('Could not find the default email sender');
+        throw new \Exception('Could not find the default email sender');
     }
 
     public function EmailBaseColor()
     {
-        $field = EmailTemplate::config()->base_color_field;
+        $field = \EmailTemplate::config()->base_color_field;
         if ($field && $this->owner->$field) {
             return $this->owner->$field;
         }
-        return EmailTemplate::config()->base_color;
+        return \EmailTemplate::config()->base_color;
     }
 
     public function EmailLogoTemplate()

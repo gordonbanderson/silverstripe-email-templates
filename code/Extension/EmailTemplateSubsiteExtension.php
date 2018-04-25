@@ -1,4 +1,8 @@
 <?php
+namespace LeKoala\EmailTemplates\Extension;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DataQuery;
+use SilverStripe\ORM\Queries\SQLSelect;
 
 /**
  * Add subsites support
@@ -23,7 +27,7 @@ class EmailSubsiteExtension extends DataExtension
     /**
      * Update any requests to limit the results to the current site
      */
-    public function augmentSQL(SQLQuery &$query, DataQuery &$dataQuery = null)
+    public function augmentSQL(SQLSelect $query, DataQuery $dataQuery = null)
     {
         if (Subsite::$disable_subsite_filter) {
             return;

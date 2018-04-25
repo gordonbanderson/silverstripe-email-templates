@@ -1,4 +1,7 @@
 <?php
+namespace LeKoala\EmailTemplates\Email;
+
+use SilverStripe\Control\Email\Email;
 
 /**
  * An improved and more pleasant base Email class to use on your project
@@ -402,7 +405,7 @@ class BetterEmail extends Email
      * @param string $val
      * @return Email
      */
-    public function setTo($val)
+    public function setTo($val, $name=null)
     {
         // Make sure this doesn't conflict with to_member property
         if ($this->to_member && $val !== $this->to_member->Email) {

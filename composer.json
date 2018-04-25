@@ -30,7 +30,13 @@
         }
     },
     "extra": {
-        "installer-name": "email-templates"
+        "installer-name": "email-templates",
+        "expose": [
+            "images",
+            "css",
+            "javascript",
+            "thirdparty"
+        ]
     },
     "support": {
         "issues": "https://github.com/lekoala/silverstripe-email-templates/issues"

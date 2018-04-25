@@ -1,13 +1,14 @@
 ---
 Name: email-templates
 After:
-  - 'framework/*'
+#  - 'framework/*'
   - 'cms/*'
 ---
 SiteConfig:
   email_templates_update_fields: true
   extensions:
     - EmailTemplateSiteConfigExtension
+
 EmailTemplate:
   helper_show_methods: false
   # template options
@@ -20,21 +21,25 @@ EmailTemplate:
   twitter_field: 'TwitterAccount'
   logo_field: 'LogoID'
   base_color_field: 'PrimaryColor'
+
 EmailImportTask:
   ignored_modules: ['cms','framework']
+
 BetterEmail:
   max_records: 1000
   # possible values : 'time' or 'max'
   cleanup_method: 'max'
   cleanup_time: '-7 days'
   template: 'DefaultEmailTemplate'
+
 Injector:
   Email:
-    class: BetterEmail
+    class: LeKoala\EmailTemplates\Email\BetterEmail
   Member_ForgotPasswordEmail:
-    class: MemberForgotPasswordEmail
+    class: LeKoala\EmailTemplates\Email\MemberForgotPasswordEmail
   Member_ChangePasswordEmail:
-    class: MemberChangePasswordEmail
+    class: LeKoala\EmailTemplates\Email\MemberChangePasswordEmail
+
 ---
 Only:
   classexists: 'Fluent'

@@ -1,4 +1,7 @@
 <?php
+namespace LeKoala\EmailTemplates\Model;
+use SilverStripe\Dev\BuildTask;
+use SilverStripe\ORM\DB;
 
 /**
  * EmailImportTask
